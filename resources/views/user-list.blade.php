@@ -183,6 +183,22 @@
             }, 'json');
         }
 
+        $('#userList tbody').on('click', '.btn-preview', function() {
+            var userId = $(this).data('user_id');
+            $.get('/users/' + userId, function(response) {
+                $('#name').val(response.name);
+                $('#username').val(response.username);
+                $('#email').val(response.email);
+                $('#user_type').val(response.user_type);
+
+                $('#updateUserBtn').attr('data-userId', userId);
+
+                // Show the modal
+                $('#exampleModal').modal('show');
+            });
+        });
+
+
         // Update user details
         function updateUserDetails(user) {
             let url = '/user-update/' + user;
